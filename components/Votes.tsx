@@ -12,6 +12,6 @@ interface VotesProps {
 }
 
 const Votes: React.FC<VotesProps> = ({ votes }) => {
-  return <Text>⭐️{votes}/10</Text>;
+  return <Text>⭐️{votes.toFixed(1)}/10</Text>;
 };
 export default Votes;
