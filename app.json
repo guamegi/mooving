@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "mooving",
+    "slug": "mooving",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "mooving"
+}
