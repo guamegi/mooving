@@ -92,7 +92,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
                 key={movie.id}
                 backdropPath={movie.backdrop_path || ""}
                 posterPath={movie.poster_path || ""}
-                originalTitle={movie.original_title}
+                originalTitle={movie.title}
                 voteAverage={movie.vote_average}
                 overview={movie.overview}
                 fullData={movie}
@@ -116,7 +116,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
       renderItem={({ item }) => (
         <HMedia
           posterPath={item.poster_path || ""}
-          originalTitle={item.original_title}
+          originalTitle={item.title}
           overview={item.overview}
           releaseDate={item.release_date}
           fullData={item}

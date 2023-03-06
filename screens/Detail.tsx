@@ -77,7 +77,7 @@ const Detail: React.FC<DetailScreenProps> = ({
   route: { params },
 }) => {
   const isDark = useColorScheme() === "dark";
-  const isMovie = "original_title" in params;
+  const isMovie = "title" in params;
   const { isLoading, data } = useQuery<MovieDetails | TVDetails>(
     [isMovie ? "movies" : "tv", params.id],
     isMovie ? moviesApi.detail : tvApi.detail
@@ -85,7 +85,7 @@ const Detail: React.FC<DetailScreenProps> = ({
 
   useEffect(() => {
     setOptions({
-      title: "original_title" in params ? "Movie" : "TV Show",
+      title: "title" in params ? "Movie" : "TV Show",
     });
   }, []);
 
@@ -111,18 +111,12 @@ const Detail: React.FC<DetailScreenProps> = ({
       if (isAndroid) {
         await Share.share({
           message: `${params.overview}\nCheck it out: ${homepage}`,
-          title:
-            "original_title" in params
-              ? params.original_title
-              : params.original_name,
+          title: "title" in params ? params.title : params.name,
         });
       } else {
         await Share.share({
           url: homepage,
-          title:
-            "original_title" in params
-              ? params.original_title
-              : params.original_name,
+          title: "title" in params ? params.title : params.name,
         });
       }
     }
@@ -151,11 +145,7 @@ const Detail: React.FC<DetailScreenProps> = ({
         />
         <Column>
           <Poster path={params.poster_path || ""} />
-          <Title>
-            {"original_title" in params
-              ? params.original_title
-              : params.original_name}
-          </Title>
+          <Title>{"title" in params ? params.title : params.name}</Title>
         </Column>
       </Header>
       <Data>

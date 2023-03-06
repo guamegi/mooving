@@ -54,11 +54,7 @@ const HList: React.FC<HListProps> = ({
         renderItem={({ item }) => (
           <VMedia
             posterPath={item.poster_path || ""}
-            originalTitle={
-              "original_title" in item
-                ? item.original_title
-                : item.original_name
-            }
+            originalTitle={"title" in item ? item.title : item.name}
             voteAverage={item.vote_average}
             fullData={item}
           />
