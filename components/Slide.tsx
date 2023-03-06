@@ -88,7 +88,11 @@ const Slide: React.FC<SlideProps> = ({
               {voteAverage > 0 ? (
                 <Vote isDark={isDark}>⭐️{voteAverage}/10</Vote>
               ) : null}
-              <Overview isDark={isDark}>{overview.slice(0, 90)}...</Overview>
+              <Overview isDark={isDark}>
+                {overview !== "" && overview.length > 100
+                  ? overview.slice(0, 100) + "..."
+                  : overview}
+              </Overview>
             </Column>
           </Wrapper>
         </BlurView>

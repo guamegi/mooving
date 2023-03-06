@@ -81,8 +81,8 @@ const HMedia: React.FC<HMediaProps> = ({
           ) : null}
           {voteAverage ? <Votes votes={voteAverage} /> : null}
           <Overview>
-            {overview !== "" && overview.length > 140
-              ? overview.slice(0, 140) + "..."
+            {overview !== "" && overview.length > 100
+              ? overview.slice(0, 100) + "..."
               : overview}
           </Overview>
         </HColumn>
