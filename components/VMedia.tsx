@@ -11,8 +11,9 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.titleColor};
   font-weight: 600;
+  font-size: 13px;
   margin-top: 7px;
   margin-bottom: 5px;
 `;
@@ -43,8 +44,8 @@ const VMedia: React.FC<VMediaProps> = ({
       <Container>
         <Poster path={posterPath} />
         <Title>
-          {originalTitle.slice(0, 12)}
-          {originalTitle.length > 12 ? "..." : null}
+          {originalTitle.slice(0, 9)}
+          {originalTitle.length > 9 ? "..." : null}
         </Title>
         <Votes votes={voteAverage} />
       </Container>

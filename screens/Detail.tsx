@@ -49,9 +49,19 @@ const Data = styled.View`
   padding: 0px 20px;
 `;
 
-const Overview = styled.Text`
+const Release = styled.Text`
   color: ${(props) => props.theme.textColor};
-  margin: 20px 0px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 40px;
+`;
+
+const Overview = styled.Text`
+  color: ${(props) => props.theme.detailOverviewColor};
+  margin: 40px 0px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
 `;
 
 const VideoBtn = styled.TouchableOpacity`
@@ -60,7 +70,7 @@ const VideoBtn = styled.TouchableOpacity`
 `;
 const BtnText = styled.Text`
   color: ${(props) => props.theme.textColor};
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 10px;
   line-height: 24px;
   margin-left: 10px;
@@ -82,7 +92,7 @@ const Detail: React.FC<DetailScreenProps> = ({
     [isMovie ? "movies" : "tv", params.id],
     isMovie ? moviesApi.detail : tvApi.detail
   );
-
+  console.log(params);
   useEffect(() => {
     setOptions({
       title: "title" in params ? "Movie" : "TV Show",
@@ -149,6 +159,9 @@ const Detail: React.FC<DetailScreenProps> = ({
         </Column>
       </Header>
       <Data>
+        {"title" in params ? (
+          <Release>개봉일: {params.release_date}</Release>
+        ) : null}
         <Overview>{params.overview}</Overview>
         {isLoading ? <Loader /> : null}
         {data?.videos?.results?.map((video: any) =>

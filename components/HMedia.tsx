@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native";
 import { Movie } from "../api";
 
 const Title = styled.Text`
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.titleColor};
   font-weight: 600;
   margin-top: 7px;
   margin-bottom: 5px;
@@ -27,11 +27,14 @@ const Overview = styled.Text`
   color: ${(props) => props.theme.textColor};
   opacity: 0.8;
   width: 80%;
+  font-size: 13px;
+  line-height: 16px;
 `;
 
 const Release = styled.Text`
   color: ${(props) => props.theme.textColor};
   font-size: 12px;
+  font-weight: 500;
   margin: 10px 0px;
 `;
 
@@ -81,8 +84,8 @@ const HMedia: React.FC<HMediaProps> = ({
           ) : null}
           {voteAverage ? <Votes votes={voteAverage} /> : null}
           <Overview>
-            {overview !== "" && overview.length > 100
-              ? overview.slice(0, 100) + "..."
+            {overview !== "" && overview.length > 122
+              ? overview.slice(0, 122) + "..."
               : overview}
           </Overview>
         </HColumn>
