@@ -10,6 +10,14 @@ const Tv = () => {
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
   const {
+    isLoading: popularLoading,
+    data: popularData,
+    hasNextPage: popularHasNextPage,
+    fetchNextPage: popularFetchNextPage,
+  } = useInfiniteQuery<TVResponse>(["tv", "popular"], tvApi.popular, {
+    getNextPageParam: getNextPage,
+  });
+  const {
     isLoading: todayLoading,
     data: todayData,
     hasNextPage: todayHasNextPage,
@@ -33,6 +41,7 @@ const Tv = () => {
   } = useInfiniteQuery<TVResponse>(["tv", "trending"], tvApi.trending, {
     getNextPageParam: getNextPage,
   });
+
   const onRefresh = () => {
     setRefreshing(true);
     queryClient.refetchQueries(["tv"]);
@@ -50,6 +59,12 @@ const Tv = () => {
       }
       contentContainerStyle={{ paddingVertical: 30 }}
     >
+      <HList
+        title="Popular TV"
+        data={popularData?.pages.map((page) => page.results).flat()}
+        hasNextPage={popularHasNextPage}
+        fetchNextPage={popularFetchNextPage}
+      />
       <HList
         title="Trending TV"
         data={trendingData?.pages.map((page) => page.results).flat()}

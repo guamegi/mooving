@@ -9,13 +9,6 @@ import { fontSizer } from "../utils";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
-const Title = styled.Text`
-  color: ${(props) => props.theme.titleColor};
-  font-weight: 600;
-  margin-top: 7px;
-  margin-bottom: 5px;
-`;
-
 const HMovie = styled.View`
   flex-direction: row;
   padding: 0px 30px;
@@ -26,12 +19,11 @@ const HColumn = styled.View`
   width: 80%;
 `;
 
-const Overview = styled.Text`
-  color: ${(props) => props.theme.textColor};
-  opacity: 0.8;
-  width: 80%;
-  font-size: 13px;
-  line-height: 16px;
+const Title = styled.Text`
+  color: ${(props) => props.theme.titleColor};
+  font-weight: 600;
+  margin-top: 7px;
+  margin-bottom: 5px;
 `;
 
 const Release = styled.Text`
@@ -39,6 +31,14 @@ const Release = styled.Text`
   font-size: 12px;
   font-weight: 500;
   margin: 10px 0px;
+`;
+
+const Overview = styled.Text`
+  color: ${(props) => props.theme.textColor};
+  opacity: 0.8;
+  width: 80%;
+  line-height: 16px;
+  font-size: ${`${fontSizer(SCREEN_WIDTH)}px`};
 `;
 
 interface HMediaProps {
@@ -86,7 +86,7 @@ const HMedia: React.FC<HMediaProps> = ({
             </Release>
           ) : null}
           {voteAverage ? <Votes votes={voteAverage} /> : null}
-          <Overview style={{ fontSize: fontSizer(SCREEN_WIDTH) }}>
+          <Overview>
             {overview !== "" && overview.length > 122
               ? overview.slice(0, 122) + "..."
               : overview}

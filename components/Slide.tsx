@@ -3,8 +3,6 @@ import { BlurView } from "expo-blur";
 import React from "react";
 import {
   Dimensions,
-  PixelRatio,
-  Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   useColorScheme,
@@ -19,12 +17,6 @@ const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 const BgImg = styled.Image``;
 
-const Title = styled.Text<{ isDark: boolean }>`
-  font-size: 16px;
-  font-weight: 600;
-  color: ${(props) => (props.isDark ? "white" : props.theme.textColor)};
-`;
-
 const Wrapper = styled.View`
   flex-direction: row;
   height: 100%;
@@ -37,11 +29,17 @@ const Column = styled.View`
   margin-left: 15px;
 `;
 
+const Title = styled.Text<{ isDark: boolean }>`
+  font-size: 16px;
+  font-weight: 600;
+  color: ${(props) => (props.isDark ? "white" : props.theme.textColor)};
+`;
+
 const Overview = styled.Text<{ isDark: boolean }>`
   margin-top: 10px;
   color: ${(props) =>
     props.isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0,0,0,0.8)"};
-  /* font-size: ${fontSizer(SCREEN_WIDTH)}; */
+  font-size: ${`${fontSizer(SCREEN_WIDTH)}px`};
 `;
 
 const Vote = styled(Overview)`
@@ -74,7 +72,6 @@ const Slide: React.FC<SlideProps> = ({
       params: { ...fullData },
     });
   };
-  // console.log(Platform.OS, PixelRatio.get(), SCREEN_WIDTH);
 
   return (
     <TouchableWithoutFeedback onPress={goToDetail}>
@@ -95,10 +92,7 @@ const Slide: React.FC<SlideProps> = ({
               {voteAverage > 0 ? (
                 <Vote isDark={isDark}>⭐️{voteAverage}/10</Vote>
               ) : null}
-              <Overview
-                isDark={isDark}
-                style={{ fontSize: fontSizer(SCREEN_WIDTH) }}
-              >
+              <Overview isDark={isDark}>
                 {overview !== "" && overview.length > 100
                   ? overview.slice(0, 100) + "..."
                   : overview}

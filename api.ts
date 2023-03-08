@@ -133,6 +133,7 @@ type MovieListResponse = QueryFunction<MovieResponse>;
 type TVListResponse = QueryFunction<TVResponse>;
 
 interface MovieFetchers {
+  popular: MovieListResponse;
   trending: MovieListResponse;
   upcoming: MovieListResponse;
   nowPlaying: MovieListResponse;
@@ -141,6 +142,7 @@ interface MovieFetchers {
 }
 
 interface TVFetchers {
+  popular: TVListResponse;
   trending: TVListResponse;
   airingToday: TVListResponse;
   topRated: TVListResponse;
@@ -149,6 +151,12 @@ interface TVFetchers {
 }
 
 export const moviesApi: MovieFetchers = {
+  popular: ({ pageParam }) =>
+    fetch(
+      `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ko-KR&page=${
+        pageParam ? pageParam : 1
+      }`
+    ).then((res) => res.json()),
   trending: ({ pageParam }) =>
     fetch(
       `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&language=ko-KR&page=${
@@ -180,6 +188,12 @@ export const moviesApi: MovieFetchers = {
 };
 
 export const tvApi: TVFetchers = {
+  popular: ({ pageParam }) =>
+    fetch(
+      `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=ko-KR&page=${
+        pageParam ? pageParam : 1
+      }`
+    ).then((res) => res.json()),
   trending: ({ pageParam }) =>
     fetch(
       `${BASE_URL}/trending/tv/week?api_key=${API_KEY}&language=ko-KR&page=${

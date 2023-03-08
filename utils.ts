@@ -23,10 +23,10 @@ export const fetchMore = (
 
 export const fontSizer = (SCREEN_WIDTH: number) => {
   if (SCREEN_WIDTH > 400) {
-    return 14;
+    return 13;
   } else if (SCREEN_WIDTH > 250) {
     return 12;
   } else {
-    return 10;
+    return 11;
   }
 };

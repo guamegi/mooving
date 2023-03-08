@@ -42,6 +42,19 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
     useQuery<MovieResponse>(["movies", "nowPlaying"], moviesApi.nowPlaying);
 
   const {
+    isLoading: popularLoading,
+    data: popularData,
+    hasNextPage: popularHasNextPage,
+    fetchNextPage: popularFetchNextPage,
+  } = useInfiniteQuery<MovieResponse>(
+    ["movies", "popular"],
+    moviesApi.popular,
+    {
+      getNextPageParam: getNextPage,
+    }
+  );
+
+  const {
     isLoading: trendingLoading,
     data: trendingData,
     hasNextPage: trendingHasNextPage,
@@ -115,6 +128,14 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               unitId={TestIds.BANNER}
             />
           </BannerContainer>
+          {popularData ? (
+            <HList
+              title="Popular Movies"
+              data={popularData?.pages.map((page) => page.results).flat()}
+              hasNextPage={popularHasNextPage}
+              fetchNextPage={popularFetchNextPage}
+            />
+          ) : null}
           {trendingData ? (
             <HList
               title="Trending Movies"
