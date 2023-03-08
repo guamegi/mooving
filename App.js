@@ -8,21 +8,18 @@ import { ThemeProvider } from "styled-components/native";
 import { useColorScheme } from "react-native";
 import { darkTheme, lightTheme } from "./styled";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { StatusBar } from "expo-status-bar";
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  // const [assets] = useAssets([require("./myImage.jpg")]);
-  // const [fonts] = Font.useFonts(Ionicons.font);
   const isDark = useColorScheme() === "dark";
 
-  // if (!fonts) {
-  // return <AppLoading />;
-  // }
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <NavigationContainer>
+          <StatusBar style="auto" />
           <Root />
         </NavigationContainer>
       </ThemeProvider>
