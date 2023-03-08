@@ -5,6 +5,17 @@ import { tvApi, TVResponse } from "../api";
 import Loader from "../components/Loader";
 import HList from "../components/HList";
 import { getNextPage } from "../utils";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
+import styled from "styled-components/native";
+
+const BannerContainer = styled.View`
+  /* padding: 10px 0px; */
+  margin-bottom: 10px;
+`;
 
 const Tv = () => {
   const queryClient = useQueryClient();
@@ -57,8 +68,11 @@ const Tv = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-      contentContainerStyle={{ paddingVertical: 30 }}
+      // contentContainerStyle={{ paddingVertical: 30 }}
     >
+      <BannerContainer>
+        <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={TestIds.BANNER} />
+      </BannerContainer>
       <HList
         title="Popular TV"
         data={popularData?.pages.map((page) => page.results).flat()}
