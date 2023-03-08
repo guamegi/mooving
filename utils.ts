@@ -20,3 +20,13 @@ export const fetchMore = (
 ) => {
   if (hasNextPage) fetchNextPage();
 };
+
+export const fontSizer = (SCREEN_WIDTH: number) => {
+  if (SCREEN_WIDTH > 400) {
+    return 14;
+  } else if (SCREEN_WIDTH > 250) {
+    return 12;
+  } else {
+    return 10;
+  }
+};

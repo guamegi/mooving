@@ -3,8 +3,11 @@ import Poster from "./Poster";
 import styled from "styled-components/native";
 import Votes from "./Votes";
 import { useNavigation } from "@react-navigation/core";
-import { TouchableOpacity } from "react-native";
+import { Dimensions, TouchableOpacity } from "react-native";
 import { Movie } from "../api";
+import { fontSizer } from "../utils";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 const Title = styled.Text`
   color: ${(props) => props.theme.titleColor};
@@ -83,7 +86,7 @@ const HMedia: React.FC<HMediaProps> = ({
             </Release>
           ) : null}
           {voteAverage ? <Votes votes={voteAverage} /> : null}
-          <Overview>
+          <Overview style={{ fontSize: fontSizer(SCREEN_WIDTH) }}>
             {overview !== "" && overview.length > 122
               ? overview.slice(0, 122) + "..."
               : overview}
