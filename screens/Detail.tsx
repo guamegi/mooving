@@ -18,6 +18,11 @@ import Poster from "../components/Poster";
 import { makeImgPath } from "../utils";
 import { BLACK_COLOR } from "../colors";
 import Loader from "../components/Loader";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -54,7 +59,7 @@ const Release = styled.Text`
   color: ${(props) => props.theme.textColor};
   font-size: 13px;
   font-weight: 500;
-  margin-top: 40px;
+  margin-top: 10px;
 `;
 
 const Overview = styled.Text`
@@ -75,6 +80,10 @@ const BtnText = styled.Text`
   margin-bottom: 10px;
   line-height: 24px;
   margin-left: 10px;
+`;
+
+const BannerContainer = styled.View`
+  padding: 10px 0px;
 `;
 
 type RootStackParamList = {
@@ -159,6 +168,9 @@ const Detail: React.FC<DetailScreenProps> = ({
           <Title>{"title" in params ? params.title : params.name}</Title>
         </Column>
       </Header>
+      <BannerContainer>
+        <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={TestIds.BANNER} />
+      </BannerContainer>
       <Data>
         {"title" in params ? (
           <Release>개봉일: {params.release_date}</Release>
