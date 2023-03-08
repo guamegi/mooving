@@ -1,4 +1,4 @@
-package com.mooving;
+package com.guamegi.mooving;
 
 import android.os.Build;
 import android.os.Bundle;

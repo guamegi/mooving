@@ -13,12 +13,12 @@ const queryClient = new QueryClient();
 
 export default function App() {
   // const [assets] = useAssets([require("./myImage.jpg")]);
-  const [fonts] = Font.useFonts(Ionicons.font);
+  // const [fonts] = Font.useFonts(Ionicons.font);
   const isDark = useColorScheme() === "dark";
 
-  if (!fonts) {
-    // return <AppLoading />;
-  }
+  // if (!fonts) {
+  // return <AppLoading />;
+  // }
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
