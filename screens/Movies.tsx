@@ -86,7 +86,8 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
     setRefreshing(false);
   };
 
-  const loading = nowPlayingLoading || upcomingLoading || trendingLoading;
+  const loading =
+    popularLoading || nowPlayingLoading || upcomingLoading || trendingLoading;
 
   return loading ? (
     <Loader />

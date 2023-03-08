@@ -58,7 +58,8 @@ const Tv = () => {
     queryClient.refetchQueries(["tv"]);
     setRefreshing(false);
   };
-  const loading = todayLoading || topLoading || trendingLoading;
+  const loading =
+    popularLoading || todayLoading || topLoading || trendingLoading;
 
   if (loading) {
     return <Loader />;
