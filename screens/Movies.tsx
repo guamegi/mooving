@@ -10,6 +10,11 @@ import HMedia from "../components/HMedia";
 import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import { MovieResponse, moviesApi } from "../api";
 import { fetchMore, getNextPage } from "../utils";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
 
 const ComingSoonTitle = styled.Text`
   color: ${(props) => props.theme.textColor};
@@ -21,6 +26,10 @@ const ComingSoonTitle = styled.Text`
 
 const HSeparator = styled.View`
   height: 20px;
+`;
+
+const BannerContainer = styled.View`
+  padding: 10px 0px;
 `;
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -85,7 +94,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               width: "100%",
               // height: SCREEN_HEIGHT / 4,
               height: 220,
-              marginBottom: 40,
+              // marginBottom: 40,
             }}
           >
             {nowPlayingData?.results.map((movie) => (
@@ -100,6 +109,12 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
               />
             ))}
           </Swiper>
+          <BannerContainer>
+            <BannerAd
+              sizes={[BannerAdSize.FULL_BANNER]}
+              unitId={TestIds.BANNER}
+            />
+          </BannerContainer>
           {trendingData ? (
             <HList
               title="Trending Movies"
