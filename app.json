@@ -3,9 +3,11 @@
     "name": "mooving",
     "slug": "mooving",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   },
-  "name": "mooving"
+  "name": "mooving",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7307128452071420~3785096483",
+    "ios_app_id": "ca-app-pub-7307128452071420~8785022162"
+  }
 }

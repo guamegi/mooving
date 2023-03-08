@@ -83,7 +83,8 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
             showsPagination={false}
             containerStyle={{
               width: "100%",
-              height: SCREEN_HEIGHT / 4,
+              // height: SCREEN_HEIGHT / 4,
+              height: 220,
               marginBottom: 40,
             }}
           >

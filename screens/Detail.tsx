@@ -39,7 +39,8 @@ const Column = styled.View`
 
 const Title = styled.Text`
   color: white;
-  font-size: 36px;
+  /* font-size: 36px; */
+  font-size: 32px;
   align-self: flex-end;
   margin-left: 15px;
   font-weight: 500;
@@ -92,7 +93,7 @@ const Detail: React.FC<DetailScreenProps> = ({
     [isMovie ? "movies" : "tv", params.id],
     isMovie ? moviesApi.detail : tvApi.detail
   );
-  console.log(params);
+  // console.log(params);
   useEffect(() => {
     setOptions({
       title: "title" in params ? "Movie" : "TV Show",
