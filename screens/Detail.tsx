@@ -21,6 +21,7 @@ import Loader from "../components/Loader";
 import {
   BannerAd,
   BannerAdSize,
+  InterstitialAd,
   TestIds,
 } from "react-native-google-mobile-ads";
 
@@ -92,6 +93,11 @@ type RootStackParamList = {
 
 type DetailScreenProps = NativeStackScreenProps<RootStackParamList, "Detail">;
 
+const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ["fashion", "clothing"],
+});
+
 const Detail: React.FC<DetailScreenProps> = ({
   navigation: { setOptions },
   route: { params },
@@ -107,6 +113,11 @@ const Detail: React.FC<DetailScreenProps> = ({
     setOptions({
       title: "title" in params ? "Movie" : "TV Show",
     });
+    interstitial.load();
+    return () => {
+      // console.log("unmount!");
+      interstitial.show();
+    };
   }, []);
 
   useEffect(() => {
@@ -168,9 +179,9 @@ const Detail: React.FC<DetailScreenProps> = ({
           <Title>{"title" in params ? params.title : params.name}</Title>
         </Column>
       </Header>
-      <BannerContainer>
+      {/* <BannerContainer>
         <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={TestIds.BANNER} />
-      </BannerContainer>
+      </BannerContainer> */}
       <Data>
         {"title" in params ? (
           <Release>개봉일: {params.release_date}</Release>
