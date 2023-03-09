@@ -1,16 +1,22 @@
-import { ScrollView, RefreshControl } from "react-native";
+import { ScrollView, RefreshControl, Platform } from "react-native";
 import React, { useState } from "react";
 import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import { tvApi, TVResponse } from "../api";
 import Loader from "../components/Loader";
 import HList from "../components/HList";
-import { getNextPage } from "../utils";
+import { appId, getNextPage } from "../utils";
 import {
   BannerAd,
   BannerAdSize,
   TestIds,
 } from "react-native-google-mobile-ads";
 import styled from "styled-components/native";
+
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : Platform.OS === "android"
+  ? appId.android
+  : appId.ios;
 
 const BannerContainer = styled.View`
   /* padding: 10px 0px; */
@@ -72,7 +78,7 @@ const Tv = () => {
       // contentContainerStyle={{ paddingVertical: 30 }}
     >
       <BannerContainer>
-        <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={TestIds.BANNER} />
+        <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={adUnitId} />
       </BannerContainer>
       <HList
         title="Popular TV"

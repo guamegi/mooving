@@ -15,15 +15,18 @@ import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import { Movie, MovieDetails, moviesApi, TV, tvApi, TVDetails } from "../api";
 import Poster from "../components/Poster";
-import { makeImgPath } from "../utils";
+import { appId, makeImgPath } from "../utils";
 import { BLACK_COLOR } from "../colors";
 import Loader from "../components/Loader";
-import {
-  BannerAd,
-  BannerAdSize,
-  InterstitialAd,
-  TestIds,
-} from "react-native-google-mobile-ads";
+import { InterstitialAd, TestIds } from "react-native-google-mobile-ads";
+
+const adUnitId = __DEV__
+  ? TestIds.INTERSTITIAL
+  : Platform.OS === "android"
+  ? appId.android
+  : appId.ios;
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId);
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -83,20 +86,11 @@ const BtnText = styled.Text`
   margin-left: 10px;
 `;
 
-const BannerContainer = styled.View`
-  padding: 10px 0px;
-`;
-
 type RootStackParamList = {
   Detail: Movie | TV;
 };
 
 type DetailScreenProps = NativeStackScreenProps<RootStackParamList, "Detail">;
-
-const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ["fashion", "clothing"],
-});
 
 const Detail: React.FC<DetailScreenProps> = ({
   navigation: { setOptions },
@@ -108,15 +102,28 @@ const Detail: React.FC<DetailScreenProps> = ({
     [isMovie ? "movies" : "tv", params.id],
     isMovie ? moviesApi.detail : tvApi.detail
   );
-  // console.log(params);
+
   useEffect(() => {
     setOptions({
       title: "title" in params ? "Movie" : "TV Show",
     });
+    /*  화면 진입시 바로 전면광고
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        interstitial.show();
+      }
+    );
+    interstitial.load();
+    return unsubscribe;
+    */
     interstitial.load();
     return () => {
-      // console.log("unmount!");
-      interstitial.show();
+      try {
+        interstitial.show();
+      } catch (e) {
+        console.log(e);
+      }
     };
   }, []);
 
@@ -179,9 +186,6 @@ const Detail: React.FC<DetailScreenProps> = ({
           <Title>{"title" in params ? params.title : params.name}</Title>
         </Column>
       </Header>
-      {/* <BannerContainer>
-        <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={TestIds.BANNER} />
-      </BannerContainer> */}
       <Data>
         {"title" in params ? (
           <Release>개봉일: {params.release_date}</Release>

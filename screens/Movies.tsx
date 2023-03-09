@@ -2,19 +2,25 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
-import { Dimensions, FlatList } from "react-native";
+import { Dimensions, FlatList, Platform } from "react-native";
 import Slide from "../components/Slide";
 import HList from "../components/HList";
 import Loader from "../components/Loader";
 import HMedia from "../components/HMedia";
 import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import { MovieResponse, moviesApi } from "../api";
-import { fetchMore, getNextPage } from "../utils";
+import { appId, fetchMore, getNextPage } from "../utils";
 import {
   BannerAd,
   BannerAdSize,
   TestIds,
 } from "react-native-google-mobile-ads";
+
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : Platform.OS === "android"
+  ? appId.android
+  : appId.ios;
 
 const ComingSoonTitle = styled.Text`
   color: ${(props) => props.theme.textColor};
@@ -124,10 +130,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
             ))}
           </Swiper>
           <BannerContainer>
-            <BannerAd
-              sizes={[BannerAdSize.FULL_BANNER]}
-              unitId={TestIds.BANNER}
-            />
+            <BannerAd sizes={[BannerAdSize.FULL_BANNER]} unitId={adUnitId} />
           </BannerContainer>
           {popularData ? (
             <HList
