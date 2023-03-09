@@ -1,7 +1,4 @@
 import React from "react";
-import { useAssets } from "expo-asset";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import Root from "./navigations/Root";
 import { ThemeProvider } from "styled-components/native";
