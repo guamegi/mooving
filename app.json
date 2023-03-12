@@ -7,14 +7,16 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#FFFFFF"
+      "resizeMode": "cover"
     },
+    "userInterfaceStyle": "automatic",
     "android": {
-      "package": "com.guamegi.mooving"
+      "package": "com.guamegi.mooving",
+      "userInterfaceStyle": "automatic"
     },
     "ios": {
-      "bundleIdentifier": "com.guamegi.mooving"
+      "bundleIdentifier": "com.guamegi.mooving",
+      "userInterfaceStyle": "automatic"
     }
   },
   "name": "mooving",
