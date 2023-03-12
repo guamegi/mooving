@@ -9,14 +9,11 @@
       "image": "./assets/splash.png",
       "resizeMode": "cover"
     },
-    "userInterfaceStyle": "automatic",
     "android": {
-      "package": "com.guamegi.mooving",
-      "userInterfaceStyle": "automatic"
+      "package": "com.guamegi.mooving"
     },
     "ios": {
-      "bundleIdentifier": "com.guamegi.mooving",
-      "userInterfaceStyle": "automatic"
+      "bundleIdentifier": "com.guamegi.mooving"
     }
   },
   "name": "mooving",
