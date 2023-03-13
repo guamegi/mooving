@@ -2,7 +2,7 @@
   "expo": {
     "name": "mooving",
     "slug": "mooving",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "assetBundlePatterns": ["**/*"],
     "icon": "./assets/icon.png",
     "splash": {
@@ -10,7 +10,7 @@
       "resizeMode": "cover"
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "package": "com.guamegi.mooving"
     },
     "ios": {
