@@ -31,7 +31,12 @@ export const fontSizer = (SCREEN_WIDTH: number) => {
   }
 };
 
-export const appId = {
-  android: "ca-app-pub-7307128452071420~3785096483",
-  ios: "ca-app-pub-7307128452071420~8785022162",
+export const bannerAppId = {
+  android: "ca-app-pub-7307128452071420/6938707586",
+  ios: "ca-app-pub-7307128452071420/2184922396",
+};
+
+export const InterstitialAdAppId = {
+  android: "ca-app-pub-7307128452071420/3881718264",
+  ios: "ca-app-pub-7307128452071420/6674831748",
 };

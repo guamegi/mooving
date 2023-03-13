@@ -4,7 +4,7 @@ import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import { tvApi, TVResponse } from "../api";
 import Loader from "../components/Loader";
 import HList from "../components/HList";
-import { appId, getNextPage } from "../utils";
+import { bannerAppId, getNextPage } from "../utils";
 import {
   BannerAd,
   BannerAdSize,
@@ -15,8 +15,8 @@ import styled from "styled-components/native";
 const adUnitId = __DEV__
   ? TestIds.BANNER
   : Platform.OS === "android"
-  ? appId.android
-  : appId.ios;
+  ? bannerAppId.android
+  : bannerAppId.ios;
 
 const BannerContainer = styled.View`
   /* padding: 10px 0px; */

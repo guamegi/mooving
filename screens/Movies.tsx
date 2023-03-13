@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import HMedia from "../components/HMedia";
 import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
 import { MovieResponse, moviesApi } from "../api";
-import { appId, fetchMore, getNextPage } from "../utils";
+import { bannerAppId, fetchMore, getNextPage } from "../utils";
 import {
   BannerAd,
   BannerAdSize,
@@ -19,8 +19,8 @@ import {
 const adUnitId = __DEV__
   ? TestIds.BANNER
   : Platform.OS === "android"
-  ? appId.android
-  : appId.ios;
+  ? bannerAppId.android
+  : bannerAppId.ios;
 
 const ComingSoonTitle = styled.Text`
   color: ${(props) => props.theme.textColor};

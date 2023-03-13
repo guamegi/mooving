@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import { Movie, MovieDetails, moviesApi, TV, tvApi, TVDetails } from "../api";
 import Poster from "../components/Poster";
-import { appId, makeImgPath } from "../utils";
+import { InterstitialAdAppId, makeImgPath } from "../utils";
 import { BLACK_COLOR } from "../colors";
 import Loader from "../components/Loader";
 import { InterstitialAd, TestIds } from "react-native-google-mobile-ads";
@@ -23,8 +23,8 @@ import { InterstitialAd, TestIds } from "react-native-google-mobile-ads";
 const adUnitId = __DEV__
   ? TestIds.INTERSTITIAL
   : Platform.OS === "android"
-  ? appId.android
-  : appId.ios;
+  ? InterstitialAdAppId.android
+  : InterstitialAdAppId.ios;
 
 const interstitial = InterstitialAd.createForAdRequest(adUnitId);
 
