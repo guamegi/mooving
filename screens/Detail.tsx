@@ -105,18 +105,8 @@ const Detail: React.FC<DetailScreenProps> = ({
 
   useEffect(() => {
     setOptions({
-      title: "title" in params ? "Movie" : "TV Show",
+      title: isMovie ? "Movie" : "TV Show",
     });
-    /*  화면 진입시 바로 전면광고
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        interstitial.show();
-      }
-    );
-    interstitial.load();
-    return unsubscribe;
-    */
     interstitial.load();
     return () => {
       try {
@@ -146,17 +136,17 @@ const Detail: React.FC<DetailScreenProps> = ({
           ? `https://www.imdb.com/title/${data.imdb_id}/`
           : data.homepage;
 
-      if (isAndroid) {
-        await Share.share({
-          message: `${params.overview}\nCheck it out: ${homepage}`,
-          title: "title" in params ? params.title : params.name,
-        });
-      } else {
-        await Share.share({
-          url: homepage,
-          title: "title" in params ? params.title : params.name,
-        });
-      }
+      const shareOptions = isAndroid
+        ? {
+            message: `${params.overview}\nCheck it out: ${homepage}`,
+            title: isMovie ? params.title : params.name,
+          }
+        : {
+            url: homepage,
+            title: isMovie ? params.title : params.name,
+          };
+
+      await Share.share(shareOptions);
     }
   };
 
@@ -183,15 +173,13 @@ const Detail: React.FC<DetailScreenProps> = ({
         />
         <Column>
           <Poster path={params.poster_path || ""} />
-          <Title>{"title" in params ? params.title : params.name}</Title>
+          <Title>{isMovie ? params.title : params.name}</Title>
         </Column>
       </Header>
       <Data>
-        {"title" in params ? (
-          <Release>개봉일: {params.release_date}</Release>
-        ) : null}
+        {isMovie && <Release>개봉일: {params.release_date}</Release>}
         <Overview>{params.overview}</Overview>
-        {isLoading ? <Loader /> : null}
+        {isLoading && <Loader />}
         {data?.videos?.results?.map((video: any) =>
           video.site === "YouTube" ? (
             <VideoBtn key={video.key} onPress={() => openYTLink(video.key)}>
